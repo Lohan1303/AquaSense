@@ -1,0 +1,47 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #007BFF;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+    header img {
+        width: 100px;
+        height: auto;
+    }
+
+section {
+    margin: 20px;
+}
+
+h2 {
+    font-size: 24px;
+}
+
+.developer {
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+    .developer img {
+        width: 100px;
+        height: auto;
+    }
+
+#contact a {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+}
+
+    #contact a:hover {
+        background-color: #0056b3;
+    }

@@ -1,0 +1,107 @@
+﻿@model UsuarioViewModel
+@{
+    Layout = "_Layout";
+}
+
+<style>
+    fieldset {
+        padding: 0 20px 20px 40px;
+        border: 1px solid #666;
+        border-radius: 8px;
+        padding-top: 10px;
+    }
+
+    fieldset-filho {
+        padding: 0 10px 10px;
+        border: 1px solid #666;
+        border-radius: 8px;
+        padding-top: 10px;
+    }
+
+    legend {
+        padding: 2px 4px;
+        width: 15%
+    }
+
+    .container {
+        max-width: 100%;
+        width: 50%; /* Ajuste a largura conforme necessário */
+        margin: 0 auto; /* Centraliza horizontalmente */
+    }
+
+</style>
+<form asp-action="Save" enctype="multipart/form-data">
+    <div class="container">
+
+        <fieldset class="fieldset-filho">
+            <legend>Cadastro</legend>
+            <input type="hidden" name="Operacao" value="@ViewBag.Operacao" />
+            <input asp-for="Id" type="hidden" />
+
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div class="alert alert-danger">
+                    <p>Por favor, corrija os seguintes erros:</p>
+                    <ul>
+                        @foreach (var key in ViewData.ModelState.Keys)
+                        {
+                            foreach (var error in ViewData.ModelState[key].Errors)
+                            {
+                                <li>@error.ErrorMessage</li>
+                            }
+                        }
+                    </ul>
+                </div>
+            }
+            <fieldset class="fieldset-filho">
+                <legend style="width: 40%">Usuário administrador</legend>
+                <label for="loginUsuario" class="control-label">Login do Usuario</label>
+                <input asp-for="LoginUsuario" class="form-control" />
+                <span asp-validation-for="LoginUsuario" class="text-danger"></span>
+                <br />
+
+                <label for="NomePessoa" class="control-label">Nome da pessoa</label>
+                <input asp-for="NomePessoa" class="form-control" />
+                <span asp-validation-for="NomePessoa" class="text-danger"></span>
+                <br />
+
+                <label for="senha" class="control-label">Senha</label>
+                <input asp-for="Senha" class="form-control" />
+                <span asp-validation-for="Senha" class="text-danger"></span>
+                <br />
+
+                <br />
+                <input type="file" name="Imagem" id="Imagem" onchange="exibirImagem()" class="btn btn-secondary">
+                <img id="imgPreview" src="data:image/jpeg;base64,@Model.ImagemEmBase64" class="img-responsive"
+                     width="200">
+                <span asp-validation-for="Imagem" class="text-danger"></span>
+                <br />
+                <br />
+            </fieldset>
+            <br />
+            <br />
+            <br />
+            <fieldset>
+                <legend style="width: 40%">Conjunto Habitacional</legend>
+                <label for="NomeConjuntoHabitacional" class="control-label">Nome do conjunto habitacional</label>
+                <input asp-for="NomeConjuntoHabitacional" class="form-control" />
+                <span asp-validation-for="NomeConjuntoHabitacional" class="text-danger"></span>
+                <br />
+            </fieldset>
+            <br />
+            <input type="submit" value="Salvar dados" class="btn btn-info" />
+            <a href="javascript:history.back()" class="btn btn-default">Voltar</a>
+            <br />
+        </fieldset>
+    </div>
+</form>
+
+<script>
+    function exibirImagem() {
+        var oFReader = new FileReader();
+        oFReader.readAsDataURL(document.getElementById("Imagem").files[0]);
+        oFReader.onload = function (oFREvent) {
+            document.getElementById("imgPreview").src = oFREvent.target.result;
+        };
+    }
+</script>

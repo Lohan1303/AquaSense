@@ -1,0 +1,46 @@
+﻿@model List<UsuarioViewModel>
+@{
+    Layout = "_LayoutSideBar";
+}
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MoneyMind</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <h2>Lista de Usuarios Cadastrados</h2>
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Login</th>
+                    <th>Nome</th>
+                    <th>Senha</th>
+                    <th>Adm</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (UsuarioViewModel Usuario in Model)
+                {
+                    <tr>
+                        <td>@Usuario.Id</td>
+                        <td>@Usuario.LoginUsuario</td>
+                        <td>@Usuario.NomePessoa</td>
+                        <td>@Usuario.Senha</td>
+                        <td>@Usuario.Adm</td>
+                        <td>
+                            <a href="/Usuario/Edit?id=@Usuario.Id" class="btn btn-primary">Editar</a>
+                            <a href="javascript:apagarRegistro(@Usuario.Id, 'Usuario')" class="btn btn-danger">Excluir</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="text-right">
+            <a href="/Usuario/Create" class="btn btn-success">Adicionar Usuario</a>
+        </div>
+    </div>
+</body>

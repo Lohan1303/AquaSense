@@ -1,0 +1,116 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <title>@ViewData["Title"] - CodingLab</title>
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="~/css/sideBar.css" />
+    <script src="~/js/sideBar.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body enctype="multipart/form-data">
+    <div class="sidebar">
+        <div class="logo-details">
+            <i class='bx bxl-c-plus-plus icon'></i>
+            <div class="logo_name">AquaSense</div>
+            <i class='bx bx-menu' id="btn"></i>
+        </div>
+        <ul class="nav-list">
+            <li>
+                <i class='bx bx-search'></i>
+                <input type="text" placeholder="Search...">
+                <span class="tooltip">Search</span>
+            </li>
+            <li>
+                <a href="#" onclick="CarregaPaginaCentral('/Home/Index')">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="links_name">Home</span>
+                </a>
+                <span class="tooltip">Home</span>
+            </li>
+            @if (ViewBag.Adm)
+            {
+                <li>
+
+                    <a href="#" onclick="CarregaPaginaCentral('/Usuario/Index')">
+                        <i class='bx bx-user'></i>
+                        <span class="links_name">User</span>
+                    </a>
+                    <span class="tooltip">User</span>
+                </li>
+            } 
+            <li>
+                <a href="#" onclick="CarregaPaginaCentral('/Portifolio/Index')">
+                    <i class='bx bx-wallet'></i>
+                    <span class="links_name">Portifolio</span>
+                </a>
+                <span class="tooltip">Portifolio</span>
+            </li>
+            @if (ViewBag.Adm)
+            { 
+                <li>
+                    <a href="#" onclick="CarregaPaginaCentral('/Ativo/Index')">
+                        <i class='bx bx-money'></i>
+                        <span class="links_name">Ativos</span>
+                    </a>
+                    <span class="tooltip">Ativos</span>
+                </li>
+            } 
+            <li>
+                <a href="#" onclick="CarregaPaginaCentral('/Carteira/ExibeMovimentacao')">
+                    <i class='bx bx-transfer'></i>
+                    <span class="links_name">Movimentações</span>
+                </a>
+                <span class="tooltip">Movimentações</span>
+            </li>
+            <li>
+                <a href="#" onclick="CarregaPaginaCentral('/Sobre/Index')">
+                    <i class='bx bx-info-circle'></i>
+                    <span class="links_name">Sobre</span>
+                </a>
+                <span class="tooltip">Portifolio</span>
+            </li>
+            <li class="profile">
+                <div class="profile-details">
+                    <img src="data:image/jpeg;base64,@ViewBag.ImagemBase64" alt="profileImg">
+                    <div class="name_job">
+                        <div class="name">@ViewBag.LoginUsuario</div>
+                    </div>
+                    <a type="button" href="@Url.Action("LogOff", "Login")">
+                        <i class='bx bx-log-out' id="log_out"></i>
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <section id="content-container" class="home-section">
+        @RenderBody()
+    </section>
+    <script>
+        let sidebar = document.querySelector(".sidebar");
+        let closeBtn = document.querySelector("#btn");
+        let searchBtn = document.querySelector(".bx-search");
+        closeBtn.addEventListener("click", () => {
+            sidebar.classList.toggle("open");
+            menuBtnChange();//calling the function(optional)
+        });
+        searchBtn.addEventListener("click", () => { // Sidebar open when you click on the search icon
+            sidebar.classList.toggle("open");
+            menuBtnChange(); //calling the function(optional)
+        });
+        // following are the code to change sidebar button(optional)
+        function menuBtnChange() {
+            if (sidebar.classList.contains("open")) {
+                closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the icons class
+            } else {
+                closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");//replacing the icons class
+            }
+        }
+    </script>
+</body>
+</html>

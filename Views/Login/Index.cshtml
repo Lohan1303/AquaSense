@@ -1,0 +1,38 @@
+﻿@model LoginViewModel
+@{
+    Layout = null;
+}
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link rel="stylesheet" href="~/css/home.css" />
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<div class="sidenav">
+    <div class="login-main-text">
+        <h1>AquaSense</h1>
+        <h3>O monitoramento do seu uso de água em um só clique</h3>
+        <br />
+        <p>Faça login ou registre-se para acessar.</p>
+    </div>
+</div>
+<div class="main">
+    <div class="col-md-6 col-sm-12">
+        <div class="login-form">
+            <form action="/login/login" method="post">
+                <div class="form-group">
+                    <label for="Login">Usuario</label>
+                    <input asp-for="Login" class="form-control" placeholder="Usuario">
+                    <span asp-validation-for="Login" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="senha">Senha</label>
+                    <input asp-for="Senha" type="password" class="form-control" placeholder="Senha">
+                    <span asp-validation-for="Senha" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn" style="background-color: #0e5396; color:#ffffff">Login</button>
+            <a type="button" class="btn btn-secondary" style="background-color: #02294e; color:#ffffff" href="@Url.Action("Create", "Login")">Registre-se</a>
+            </form>
+        </div>
+    </div>
+</div>
